@@ -1,4 +1,4 @@
-def encryption(plain_text,shift_value):
+def encryption(plain_text, shift_value):
     
     ciphered_text = ""
 
@@ -31,11 +31,17 @@ def encryption(plain_text,shift_value):
 
     return ciphered_text
 
-# Input     
-plain_text = "Hello, World! 123"
-shift_value = 3
+# Create while loop for testing 
+repeat = int(input("(Testing purposes) - Loop #: "))
+while repeat >= 1:
 
-# Output
-print("Cipher: " + encryption(plain_text, shift_value))
+    # Input     
+    plain_text = input("Plain Text: ")
+    shift_value = int(input("Shift: "))
+
+    # Output
+    print("Cipher: " + encryption(plain_text, shift_value))
+    print()
+    repeat -= 1
 
 # Expected Output: Khoor, Zruog! 123

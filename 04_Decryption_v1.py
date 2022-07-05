@@ -1,16 +1,47 @@
-shift_value = 5
-plain_text = "UFXX\TWI6789:"
+def decryption(plain_text, shift_value):
+    
+    ciphered_text = ""
 
-ciphered_text = ""
+    # For encryption use formula En(x) = (x + n)mod 26
+    for c in plain_text:
 
-for c in plain_text:
+        # Determine starting ascii for range
+        if c.isupper():
+            starting_ascii = ord('A')
 
-    if c.isalpha() or c.isnumeric():
-        c_unicode = ord(c) - shift_value
-        new_c = chr(c_unicode)
-        ciphered_text = ciphered_text + new_c
+        elif c.islower():
+            starting_ascii = ord('a')
+        
+        # Exclude encryption for numbers, symbols, etc.
+        else:
+            ciphered_text += c
+            continue
 
-    else:
-        ciphered_text += c
+        # Find position in unicode
+        c_index = ord(c) - starting_ascii
 
-print("Your ciphered text is: " + ciphered_text)
+        # Perform shift 
+        new_index = (c_index - shift_value) % 26
+
+        # Convert to new character
+        final_output = chr(starting_ascii + new_index)
+
+        # Append to string
+        ciphered_text = ciphered_text + final_output
+
+    return ciphered_text
+
+# Create while loop for testing 
+repeat = int(input("(Testing purposes) - Loop #: "))
+while repeat >= 1:
+
+    # Input     
+    plain_text = input("Plain Text: ")
+    shift_value = int(input("Shift: "))
+
+    # Output
+    print("Cipher: " + decryption(plain_text, shift_value))
+    print()
+    repeat -= 1
+
+# Expected Output: Khoor, Zruog! 123
