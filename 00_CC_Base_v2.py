@@ -21,14 +21,17 @@ def choice_checker(question, valid_list, error):
 
 # Checks for an integer more than 0
 def int_check(question):
+
     error="Please enter an integer"
+
     valid=False
     while not valid:
+
         # Ask user for number and check it is valid
         try:
             response=int(input(question))
-            print(response)
             return response
+            
         except ValueError:
             print(error)
 
@@ -40,5 +43,3 @@ get_cipher = choice_checker("Encrypt or decrypt: ", cipher_list, "Invalid respon
 plain_text = input("Enter text to be ciphered: ")
 shift_value = int_check("Enter your key / shift_value: ")
 
-result = ""
-print(result)

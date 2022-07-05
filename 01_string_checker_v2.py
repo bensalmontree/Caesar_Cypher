@@ -13,7 +13,7 @@ def choice_checker(question, valid_list, error):
 
         for item in valid_list:
             if response == item[0] or response == item:
-                print("You choice: " + response)
+                print("You chose: " + response)
                 return item
 
         # output error if item is not in list
