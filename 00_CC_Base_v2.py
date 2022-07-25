@@ -42,4 +42,3 @@ cipher_list = ["encrpyt", "encryption", "decrypt", "decryption"]
 get_cipher = choice_checker("Encrypt or decrypt: ", cipher_list, "Invalid response, try again")
 plain_text = input("Enter text to be ciphered: ")
 shift_value = int_check("Enter your key / shift_value: ")
-
