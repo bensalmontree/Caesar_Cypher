@@ -36,7 +36,7 @@ def cipher(plain_text, shift_value):
         final_output = chr(starting_ascii + new_index)
 
         # Append to string
-        ciphered_text = ciphered_text + final_output
+        ciphered_text += final_output
 
     return ciphered_text
 
@@ -67,24 +67,42 @@ def int_check(question):
     valid = False
     while not valid:
 
-        # Ask user for number and check it is valid
-        try:
-            response = int(input(question))
-            return response
+        if get_cipher == "encrypt":
 
-        # If no input, generate random number
-        except ValueError:
-            random_number = random.randint(1,10)
-            print("Shift value is left blank, new shift: " + str(random_number))
-            return random_number
+            # Ask user for number and check it is valid
+            try:
+                response = int(input(question))
+                return response
+
+            # If no input, generate random number
+            except ValueError:
+                random_number = random.randint(1,25)
+                print("Shift value is left blank, randomly generated shift: " + str(random_number))
+                return random_number
+
+        else:
+            # Ask user for number and check it is valid
+            try:
+                response = int(input(question))
+                return response
+
+            # If decrypting and user does not have key, proceed to randomly generate possible  
+            except ValueError:                
+                hack = True
+                print("Shift not found, generating list of possible solutions...")
+                return hack
 
 # Valid responses
 cipher_list = ["encrypt", "encryption", "decrypt", "decryption"]
 yes_no_list = ["yes", "no"]
 
+
 # Start of loop
 loop = "yes"
 while loop == "yes":
+
+    # Define shift_value
+    shift_value = False
 
     # Get inputs (EN / DECRYPTION, PLAIN TEXT, SHIFT)
     get_cipher = choice_checker("Encrypt or decrypt: ", cipher_list, "Invalid response, try again")
@@ -92,7 +110,24 @@ while loop == "yes":
     shift_value = int_check("Enter your key / shift_value: ")
 
     # Output
-    print("Cipher: " + cipher(plain_text, shift_value))
+    if get_cipher == "encrypt":
+        print("Cipher: " + cipher(plain_text, shift_value))
+
+    else:
+
+        # For decryption and key is unknown, iterate through every possible decryption key and generate list
+        if shift_value == True:
+            
+            # Goes through all keys
+            print()
+            for i in range(0,26):
+                brute_force_text = cipher(plain_text, i)
+                print("Key #{}: {}".format(i, brute_force_text))
+
+        else:
+            print("Cipher: " + cipher(plain_text, shift_value))
+
     print()
 
-    loop = choice_checker("Repeat? [y/n] ", yes_no_list, "Invalid response, try again")
+    # Ask user if they want to continue loop
+    loop = choice_checker("Do you have more code to cipher? ", yes_no_list, "Invalid response, try again")
