@@ -65,7 +65,7 @@ def choice_checker(question, valid_list, error):
 def int_check(question):
 
     # Error message
-    error="Please enter an integer or leave blank to generate a random key"
+    error="Please enter an integer or leave blank to generate random key (e) / find original key (d)"
 
     valid = False
     while not valid:
@@ -92,11 +92,14 @@ def int_check(question):
         # Print error message for invalid response
         elif response.isnumeric() == False:
             print(error)
-            
+            print()
+
 # Valid responses
 cipher_list = ["encrypt", "encryption", "decrypt", "decryption"]
 yes_no_list = ["yes", "no"]
 
+# Welcome statement
+print("This is a Caesar Cipher Encryption Tool. It ciphers a text by shifting its place in the alphabet by 'x' amount as well as deciphers a Caesar Cipher text\n If key is not known, for encryption it will generate a random key for you, and for decryption it will list all possible solutions \n")
 
 # Start of loop
 loop = "yes"
